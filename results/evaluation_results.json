@@ -1,0 +1,7 @@
+{
+  "psnr": 18.068686309735575,
+  "ssim": 0.7614231184981335,
+  "checkpoint": "checkpoints/best_model.pth",
+  "num_test_samples": 87,
+  "results_dir": "results/eval_20250817_133121"
+}
