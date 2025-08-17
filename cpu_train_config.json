@@ -1,0 +1,14 @@
+{
+  "device": "cpu",
+  "use_amp": false,
+  "num_workers": 0,
+  "pin_memory": false,
+  "batch_size": 1,
+  "image_size": [128, 128],
+  "flow_channels": 96,
+  "num_flow_blocks": 2,
+  "learning_rate": 0.0002,
+  "val_freq": 1,
+  "save_freq": 1,
+  "num_epochs": 30
+}
