@@ -1,17 +1,3 @@
-#!/usr/bin/env python3
-"""
-LLFlow: Low-Light Image Enhancement with Conditional Normalizing Flows
-Corrected and compacted version that preserves original functionality.
-
-Key fixes:
- - Conditional prior μ(x) used for inference and NLL (removes mid-gray output).
- - Proper log-determinant accumulation from coupling layers.
- - Removed invalid torch.load kwarg(s).
- - Stabilized coupling scale with bounded tanh.
- - Preserves: full training/eval/enhance/demo modes, tensorboard, checkpoints,
-   differentiable histogram CAL, triptych visualizer, AMP, gradient clipping.
-"""
-
 import os, json, time, logging, argparse
 from dataclasses import dataclass
 from pathlib import Path
