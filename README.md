@@ -10,7 +10,7 @@ This repository contains the complete implementation for training, evaluating, a
 - **Pre-trained Weights**: Easy-to-use testing script to run inference on your own images.
 
 ## Results & Visual Comparisons
-Below are a few samples comparing the original low-light input against our model's enhanced prediction. The model successfully recovers color, suppresses noise, and balances exposure.
+Below are a few samples showing the **Original Input (Low-Light)**, our model's **Enhanced Prediction**, and the **Ground Truth** side-by-side. The model successfully recovers color, suppresses noise, and balances exposure.
 
 <p align="center">
   <img src="assets/compare_1.png" width="45%" style="margin: 10px;" />
