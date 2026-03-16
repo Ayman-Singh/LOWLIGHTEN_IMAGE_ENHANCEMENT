@@ -1,0 +1,102 @@
+#### ELIEI Local CPU Training Config
+#### Resumes from step 3000 checkpoint, trains to step 8000 (5000 more)
+#### Uses cosine annealing for fast convergence in fewer iterations
+name: ELIEI_IR_RGB
+use_tb_logger: false
+model: LLFlow
+distortion: sr
+scale: 1
+gpu_ids: [0]
+dataset: IR_Dataset
+
+#### datasets
+datasets:
+  train:
+    root: ../train-20241116T084056Z-001/train
+    quant: 32
+    use_shuffle: true
+    n_workers: 0
+    batch_size: 16     # Auto-reduced to 1 on CPU (see train.py)
+    use_flip: true
+    color: RGB
+    use_crop: true
+    GT_size: 160       # Auto-reduced to 64 on CPU (see train.py)
+    noise_prob: 0
+    noise_level: 5
+    log_low: true
+    gamma_aug: false
+
+  val:
+    root: ../eval-20241116T084057Z-001/eval
+    n_workers: 0
+    quant: 32
+    n_max: 20
+    batch_size: 1
+    log_low: true
+
+#### Test Settings
+dataroot_GT: ../eval-20241116T084057Z-001/eval/high
+dataroot_LR: ../eval-20241116T084057Z-001/eval/low
+heat: 0.0
+model_path: ../experiments/ELIEI_IR_RGB/models/best_psnr_G.pth
+
+#### network structures
+network_G:
+  which_model_G: LLFlow
+  in_nc: 3
+  out_nc: 3
+  nf: 32
+  nb: 4
+  train_RRDB: false
+  train_RRDB_delay: 0.25    # Unfreeze RRDB at 25% = step 2000 (already past at resume from 3000)
+
+  flow:
+    K: 4
+    L: 3
+    noInitialInj: true
+    coupling: CondAffineSeparatedAndCond
+    additionalFlowNoAffine: 2
+    conditionInFeaDim: 64
+    split:
+      enable: false
+    fea_up0: true
+    stackRRDB:
+      blocks: [1]
+      concat: true
+
+#### path
+path:
+  strict_load: true
+  resume_state: auto
+
+#### training settings
+train:
+  manual_seed: 10
+  lr_G: !!float 5e-4
+  weight_decay_G: 0
+  beta1: 0.9
+  beta2: 0.99
+  lr_scheme: CosineAnnealing        # Cosine annealing (faster convergence)
+  min_lr: !!float 5e-6              # Minimum LR at end of cosine
+  warmup_iter: 0                    # No warmup (resuming, already warmed)
+  lr_steps_rel: [0.5, 0.75, 0.9, 0.95]   # Fallback for MultiStepLR
+  lr_gamma: 0.5
+  EMD: true
+  weight_l1: 0
+  weight_fl: 1
+  weight_emd: !!float 1e-2
+  niter: 20000                      # Extended for paper-setting training
+  val_freq: 500                     # Validate every 500 steps
+
+#### validation settings
+val:
+  heats: [0.0]
+  n_sample: 4
+
+test:
+  heats: [0.0, 0.7, 0.8, 0.9]
+
+#### logger
+logger:
+  print_freq: 50                    # Log every 50 steps
+  save_checkpoint_freq: !!float 1e3 # Save every 1000 steps

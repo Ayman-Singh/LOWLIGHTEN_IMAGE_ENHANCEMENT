@@ -1,0 +1,32 @@
+# Ignore large generated files and data
+Checkpoints/
+eval-*/
+train-*/
+models/
+*.keras
+*.pth
+*.pt
+
+# Jupyter Notebooks and Checkpoints
+*.ipynb
+.ipynb_checkpoints/
+
+# Zips and binaries
+*.zip
+*.tar.gz
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Papers
+*.pdf
+
+# IDEs
+.vscode/
+.idea/
+
+# OS generated
+.DS_Store
+Thumbs.db
