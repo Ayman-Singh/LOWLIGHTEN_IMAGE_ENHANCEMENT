@@ -18,10 +18,7 @@ Below are a few samples showing the **Original Input (Low-Light)**, our model's 
 </p>
 <p align="center">
   <img src="assets/compare_3.png" width="45%" style="margin: 10px;" />
-  <img src="assets/dataset_samples.png" width="45%" style="margin: 10px;" />
 </p>
-
-*Note: The `dataset_samples.png` shows the original ground truth corresponding to one of the test datasets.*
 
 ## Repository Structure
 ```text
