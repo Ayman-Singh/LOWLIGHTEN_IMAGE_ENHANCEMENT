@@ -4,8 +4,9 @@ eval-*/
 train-*/
 models/
 *.keras
-*.pth
+
 *.pt
+
 
 # Jupyter Notebooks and Checkpoints
 *.ipynb
